@@ -17,6 +17,8 @@ public class HundirLaFlota {
     public static void main(String[] args) {
         Tablero tabla = new Tablero(10);
         tabla.mostrar();
+        tabla.addBarco(5, false, 1, 1);
+        tabla.mostrarInterno();
     }
 
 }

@@ -26,7 +26,28 @@ public class Tablero {
         this.tableroInterno = new int[tamanio][tamanio];
     }
 
-    public void mostrar() {
+    public void addBarco(int tamanio, boolean posicion, int fila, int columna) {
+        /*
+            posicion 
+                true - Horizontal
+                false - Vertical
+         */
+
+        if (tamanio > tableroVisual.length || tamanio < 1
+                || fila > tableroVisual.length || fila < 1
+                || columna > tableroVisual.length || columna < 1
+                || (posicion && ((columna + tamanio) > tableroVisual.length))
+                || (!posicion && ((fila + tamanio) > tableroVisual.length))) {
+            System.out.println("No se puede poner el barco");
+        } else {
+            for (int i = 0; i < tamanio; i++) {
+                this.tableroInterno[posicion ? fila : fila + i][posicion ? columna + i : columna] = tamanio;
+            }
+        }
+    }
+
+    private void mostrar(boolean interno) {
+        System.out.println();
         for (int i = 0; i < this.tableroVisual.length; i++) {
             System.out.print("\t");
             for (int j = 0; j < this.tableroVisual.length; j++) {
@@ -39,10 +60,23 @@ public class Tablero {
                 if (j == 0) {
                     System.out.printf("[%s]\t", i + 1);
                 }
-                System.out.print(VALORES[this.tableroVisual[i][j]] + "\t");
+                String valor = interno
+                        ? String.valueOf(this.tableroInterno[i][j])
+                        : String.valueOf(VALORES[this.tableroVisual[i][j]]);
+
+                System.out.print(valor + "\t");
             }
             System.out.println();
         }
+        System.out.println();
+    }
+
+    public void mostrar() {
+        mostrar(false);
+    }
+
+    public void mostrarInterno() {
+        mostrar(true);
     }
 
 }
