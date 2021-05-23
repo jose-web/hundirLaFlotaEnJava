@@ -19,6 +19,11 @@ public class HundirLaFlota {
         tabla.mostrar();
         tabla.addBarco(5, false, 1, 1);
         tabla.mostrarInterno();
+        tabla.disparo(1, 1);
+        tabla.disparo(1, 2);
+        tabla.mostrar();
+        tabla.mostrarInterno();
+
     }
 
 }

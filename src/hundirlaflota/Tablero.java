@@ -15,10 +15,11 @@ public class Tablero {
     private final static char[] VALORES = {'.', '~', 'X'};
     private final static char[] LETRAS = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     private final int[][] tableroInterno;
+    private int disparos = 0;
 
     /*
         0 - vacio - .
-        1 - Agua - A
+        1 - Agua - ~
         2 - tocado - X
      */
     public Tablero(int tamanio) {
@@ -43,6 +44,17 @@ public class Tablero {
             for (int i = 0; i < tamanio; i++) {
                 this.tableroInterno[posicion ? fila : fila + i][posicion ? columna + i : columna] = tamanio;
             }
+        }
+    }
+
+    public void disparo(int fila, int columna) {
+        this.disparos++;
+        if (this.tableroInterno[fila][columna] > 0) { // Tocado
+            this.tableroInterno[fila][columna] = -this.tableroInterno[fila][columna];
+            this.tableroVisual[fila][columna] = 2;
+        } else if (this.tableroInterno[fila][columna] == 0) {
+            // Agua
+            this.tableroVisual[fila][columna] = 1;
         }
     }
 
