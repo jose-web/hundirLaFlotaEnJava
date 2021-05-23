@@ -42,9 +42,16 @@ public class Tablero {
             System.out.println("No se puede poner el barco");
         } else {
             for (int i = 0; i < tamanio; i++) {
-                this.tableroInterno[posicion ? fila : fila + i][posicion ? columna + i : columna] = tamanio;
-                return true;
+                if (this.tableroInterno[posicion ? fila : fila + i][posicion ? columna + i : columna] != 0) {
+                    System.out.println("No se puede poner el barco");
+                    return false;
+                }
             }
+            for (int i = 0; i < tamanio; i++) {
+                this.tableroInterno[posicion ? fila : fila + i][posicion ? columna + i : columna] = tamanio;
+            }
+            System.out.println("Barco introducido correctamente");
+            return true;
         }
         return false;
     }

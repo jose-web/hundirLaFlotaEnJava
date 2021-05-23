@@ -17,16 +17,19 @@ public class HundirLaFlota {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner myObj = new Scanner(System.in);
+        Scanner escanea = new Scanner(System.in);
         Tablero jugador = new Tablero(10);
         Tablero bot = new Tablero(10);
 
         String teclado;
 
-        System.out.print("Introduce el número de barcos:");
-        teclado = myObj.nextLine();
+        System.out.print("Introduce el número de barcos: ");
+        teclado = escanea.nextLine();
         System.out.println("");
         int numeroDeBarcos = Integer.valueOf(teclado);
+
+        int numeroDeBarcosJugador = numeroDeBarcos;
+        int numeroDeBarcosBot = numeroDeBarcos;
 
         jugador.mostrarInterno();
         System.out.println("-----------------------------------------------");
@@ -36,9 +39,9 @@ public class HundirLaFlota {
         System.out.println("Introduce los datos en este formato:'tipo posicion fila columna'");
         System.out.println("-----------------------------------------------");
 
-        for (int i = 0; i < numeroDeBarcos; i++) {
+        while (numeroDeBarcosJugador != 0) {
             System.out.print("Introduce los barcos:");
-            teclado = myObj.nextLine();
+            teclado = escanea.nextLine();
             System.out.println("");
 
             String[] arrayNuevoBarco = teclado.split(" ");
@@ -52,19 +55,41 @@ public class HundirLaFlota {
             boolean comprueba = jugador.addBarco(tipo, posicion, fila, columna);
 
             if (comprueba) {
-                numeroDeBarcos--;
+                numeroDeBarcosJugador--;
                 jugador.mostrarInterno();
             }
-
-            /*
-            jugador.addBarco(5, false, 1, 1);
-            jugador.disparo(1, 1);
-            jugador.disparo(1, 2);
-            jugador.disparo(1, 2);
-            Tablero.mostrarTableros(jugador, bot);
-             */
         }
 
+        int compruebaRepeticion = 0;
+
+        while (numeroDeBarcosBot != 0) {
+            int tipo = random(1, 5);
+            boolean posicion = Boolean.getBoolean(String.valueOf(random(0, 1)));
+            int fila = random(0, 9);
+            int columna = random(0, 9);
+
+            boolean comprueba = bot.addBarco(tipo, posicion, fila, columna);
+
+            if (comprueba) {
+                numeroDeBarcosBot--;
+            } else {
+                compruebaRepeticion++;
+                if (compruebaRepeticion == 0) {
+                    bot = new Tablero(10);
+                    compruebaRepeticion = 0;
+                    numeroDeBarcosBot = numeroDeBarcos;
+                }
+            }
+        }
+
+        System.out.println("-------------------");
+
+        bot.mostrarInterno();
+
+    }
+
+    public static int random(int min, int max) {
+        return Math.round(min + Math.round(Math.random() * max));
     }
 
 }
