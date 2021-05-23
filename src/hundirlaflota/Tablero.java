@@ -91,4 +91,39 @@ public class Tablero {
         mostrar(true);
     }
 
+    public static void mostrarTableros(Tablero tablero1, Tablero tablero2) {
+        System.out.println("");
+        System.out.print("\t");
+        for (int i = 0; i < 2; i++) {
+            if (i == 1) {
+                System.out.print("|\t\t");
+            }
+            for (int j = 0; j < tablero1.tableroVisual.length; j++) {
+                System.out.printf("[%s]\t", LETRAS[j]);
+            }
+        }
+        System.out.println("");
+
+        for (int i = 0; i < tablero1.tableroVisual.length; i++) {
+
+            for (int j = 0; j < tablero1.tableroVisual.length * 2; j++) {
+                if (j == 0) {
+                    System.out.printf("[%s]\t", i + 1);
+                }
+                if (j < tablero1.tableroVisual.length) {
+                    System.out.print(VALORES[tablero1.tableroVisual[i][j]] + "\t");
+                } else {
+                    System.out.print(VALORES[tablero2.tableroVisual[i][j - tablero1.tableroVisual.length]] + "\t");
+                }
+
+                if (j == tablero1.tableroVisual.length - 1) {
+                    System.out.printf("|\t[%s]\t", i + 1);
+                }
+
+            }
+            System.out.println("");
+
+        }
+
+    }
 }
