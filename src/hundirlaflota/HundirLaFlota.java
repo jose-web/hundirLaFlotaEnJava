@@ -67,7 +67,7 @@ public class HundirLaFlota {
 
         while (numeroDeBarcosBot != 0) {
             int tipo = arrayTipos.get(numeroDeBarcosBot - 1);
-            boolean orientacion = Boolean.getBoolean(String.valueOf(random(0, 1)));
+            boolean orientacion = random(0, 1) == 1;
             int fila = random(0, 9);
             int columna = random(0, 9);
 
@@ -96,8 +96,13 @@ public class HundirLaFlota {
             teclado = escanea.nextLine();
 
             String[] arrayDisparo = teclado.split(" ");
-            int fila = Integer.valueOf(arrayDisparo[0]);
+            int fila = Integer.valueOf(arrayDisparo[0]) - 1;
             int columna = numeroLetra(arrayDisparo[1]);
+
+            bot.disparo(fila, columna);
+
+            fila = random(0, 9);
+            columna = random(0, 9);
 
             jugador.disparo(fila, columna);
         }
