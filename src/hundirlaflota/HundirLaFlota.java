@@ -22,6 +22,8 @@ public class HundirLaFlota {
         Tablero jugador = new Tablero(10);
         Tablero bot = new Tablero(10);
 
+        int totalDisparos = 0;
+
         String teclado;
 
         System.out.print("Introduce el número de barcos: ");
@@ -50,6 +52,7 @@ public class HundirLaFlota {
 
             int tipo = Integer.valueOf(arrayNuevoBarco[0]);
             arrayTipos.add(tipo);
+            totalDisparos += tipo;
 
             boolean orientacion = "H".equals(arrayNuevoBarco[1].toUpperCase());
             int fila = Integer.valueOf(arrayNuevoBarco[2]) - 1;
@@ -101,10 +104,21 @@ public class HundirLaFlota {
 
             bot.disparo(fila, columna);
 
+            if (bot.getDisparos() == totalDisparos) {
+                System.out.println("GANA EL JUGADOR");
+                break;
+            }
+
             fila = random(0, 9);
             columna = random(0, 9);
 
             jugador.disparo(fila, columna);
+
+            if (jugador.getDisparos() == totalDisparos) {
+                System.out.println("GANA EL BOT");
+                break;
+            }
+
         }
     }
 

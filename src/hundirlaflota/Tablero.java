@@ -17,6 +17,10 @@ public class Tablero {
     private final int[][] tableroInterno;
     private int disparos = 0;
 
+    public int getDisparos() {
+        return disparos;
+    }
+
     /*
         0 - vacio - .
         1 - Agua - ~
@@ -57,10 +61,10 @@ public class Tablero {
     }
 
     public void disparo(int fila, int columna) {
-        this.disparos++;
         if (this.tableroInterno[fila][columna] > 0) { // Tocado
             this.tableroInterno[fila][columna] = -this.tableroInterno[fila][columna];
             this.tableroVisual[fila][columna] = 2;
+            this.disparos++;
         } else if (this.tableroInterno[fila][columna] == 0) {
             // Agua
             this.tableroVisual[fila][columna] = 1;
