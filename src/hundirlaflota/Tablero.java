@@ -13,7 +13,7 @@ public class Tablero {
 
     private final int[][] tableroVisual;
     private final static char[] VALORES = {'.', '~', 'X'};
-    private final static char[] LETRAS = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    public final static char[] LETRAS = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     private final int[][] tableroInterno;
     private int disparos = 0;
 

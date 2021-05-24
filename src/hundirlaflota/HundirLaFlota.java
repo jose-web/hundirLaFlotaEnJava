@@ -51,9 +51,9 @@ public class HundirLaFlota {
             int tipo = Integer.valueOf(arrayNuevoBarco[0]);
             arrayTipos.add(tipo);
 
-            boolean orientacion = "H".equals(arrayNuevoBarco[1]);
-            int fila = Integer.valueOf(arrayNuevoBarco[2]);
-            int columna = Integer.valueOf(arrayNuevoBarco[3]);
+            boolean orientacion = "H".equals(arrayNuevoBarco[1].toUpperCase());
+            int fila = Integer.valueOf(arrayNuevoBarco[2]) - 1;
+            int columna = numeroLetra(arrayNuevoBarco[3]);
 
             boolean comprueba = jugador.addBarco(tipo, orientacion, fila, columna);
 
@@ -77,7 +77,7 @@ public class HundirLaFlota {
                 numeroDeBarcosBot--;
             } else {
                 compruebaRepeticion++;
-                if (compruebaRepeticion == 0) {
+                if (compruebaRepeticion == 5) {
                     bot = new Tablero(10);
                     compruebaRepeticion = 0;
                     numeroDeBarcosBot = numeroDeBarcos;
@@ -85,14 +85,35 @@ public class HundirLaFlota {
             }
         }
 
-        System.out.println("-------------------");
+        while (true) {
+            bot.mostrarInterno();
+            Tablero.mostrarTableros(jugador, bot);
+            System.out.println("-----------------------------------------------");
+            System.out.println("Introduce los datos en este formato:'fila columna'");
+            System.out.println("-----------------------------------------------");
+            System.out.println("");
+            System.out.print("Introduce la fila y la columna: ");
+            teclado = escanea.nextLine();
 
-        bot.mostrarInterno();
+            String[] arrayDisparo = teclado.split(" ");
+            int fila = Integer.valueOf(arrayDisparo[0]);
+            int columna = numeroLetra(arrayDisparo[1]);
 
+            jugador.disparo(fila, columna);
+        }
     }
 
     public static int random(int min, int max) {
         return Math.round(min + Math.round(Math.random() * max));
     }
 
+    public static int numeroLetra(String letra) {
+        letra = letra.toUpperCase();
+        for (int i = 0; i < Tablero.LETRAS.length; i++) {
+            if (letra.equals(String.valueOf(Tablero.LETRAS[i]))) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }
