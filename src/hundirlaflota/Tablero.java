@@ -27,9 +27,9 @@ public class Tablero {
         this.tableroInterno = new int[tamanio][tamanio];
     }
 
-    public boolean addBarco(int tamanio, boolean posicion, int fila, int columna) {
+    public boolean addBarco(int tamanio, boolean orientacion, int fila, int columna) {
         /*
-            posicion 
+            orientación 
                 true - Horizontal
                 false - Vertical
          */
@@ -37,18 +37,18 @@ public class Tablero {
         if (tamanio > tableroVisual.length || tamanio < 1
                 || fila > tableroVisual.length - 1 || fila < 0
                 || columna > tableroVisual.length - 1 || columna < 0
-                || (posicion && ((columna + tamanio) > tableroVisual.length))
-                || (!posicion && ((fila + tamanio) > tableroVisual.length))) {
+                || (orientacion && ((columna + tamanio) > tableroVisual.length))
+                || (!orientacion && ((fila + tamanio) > tableroVisual.length))) {
             System.out.println("No se puede poner el barco");
         } else {
             for (int i = 0; i < tamanio; i++) {
-                if (this.tableroInterno[posicion ? fila : fila + i][posicion ? columna + i : columna] != 0) {
+                if (this.tableroInterno[orientacion ? fila : fila + i][orientacion ? columna + i : columna] != 0) {
                     System.out.println("No se puede poner el barco");
                     return false;
                 }
             }
             for (int i = 0; i < tamanio; i++) {
-                this.tableroInterno[posicion ? fila : fila + i][posicion ? columna + i : columna] = tamanio;
+                this.tableroInterno[orientacion ? fila : fila + i][orientacion ? columna + i : columna] = tamanio;
             }
             System.out.println("Barco introducido correctamente");
             return true;
